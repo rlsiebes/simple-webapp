@@ -29,12 +29,29 @@ This is used in the demonstration of development of Ansible Playbooks.
     
         service mysql start
 
+Database root user zetten:
+sudo service mysql stop
+sudo mysqld_safe --skip-grant-tables
+sudo service mysql start
+sudo mysql -u root
+use mysql;
+show tables;
+describe user;
+update user set authentication_string=password('1111') where user='root';
+FLUSH PRIVILEGES;
+Log in with password "1111".
+
+
+
   - Create database and database users
         
         # mysql -u <username> -p
         
         mysql> CREATE DATABASE employee_db;
         mysql> GRANT ALL ON *.* to db_user@'%' IDENTIFIED BY 'Passw0rd';
+    CREATE USER 'newuser1'@'localhost' IDENTIFIED WITH mysql_native_password BY 'Password@123';
+GRANT ALL ON *.* TO 'newuser1'@'localhost';
+
         mysql> USE employee_db;
         mysql> CREATE TABLE employees (name VARCHAR(20));
         
